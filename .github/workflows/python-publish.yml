@@ -8,9 +8,9 @@
 
 name: Upload Python Package
 
-on: push
-#   release:
-#     types: [published]
+on:
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -19,6 +19,7 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
+    environment: publish
     strategy:
       matrix:
         python-version: ["3.9"]
