@@ -57,6 +57,7 @@ class VideoStreamWriter(BaseWriter):
             codec: Codec of the video.
             is_color: Whether the video is color or not.
         """
+        super().__init__()
         self.url_or_device = url_or_device
         self.fps = fps
         self.size = size
@@ -86,12 +87,3 @@ class VideoStreamWriter(BaseWriter):
         if self._writer is None:
             self.open()
         self._writer.write(image)
-
-
-if __name__ == '__main__':
-    from cvflow.io.input.video import VideoStreamReader
-
-    with VideoStreamReader('demos/sample.mp4') as reader:
-        with VideoStreamWriter('demos/sample_output.mp4', size=(reader.info.width, reader.info.height), codec='mp4v', is_color=True) as writer:
-            for index, image in reader:
-                writer.write(image)
