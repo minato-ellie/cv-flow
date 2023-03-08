@@ -8,7 +8,7 @@ import numpy as np
 from cvflow.io.output.base import BaseWriter
 
 
-class DisplayWriter(BaseWriter[np.ndarray], multiprocessing.Process):
+class DisplayWriter(BaseWriter[np.ndarray]):
 
     def __init__(
             self,
@@ -41,13 +41,13 @@ class DisplayWriter(BaseWriter[np.ndarray], multiprocessing.Process):
     def open(self):
         if self._is_open:
             return
-        self._process = multiprocessing.Process(target=self._run)
+        self._process = multiprocessing.Process(target=self.run)
         self._process.start()
         self._is_open = True
 
     def close(self):
         if self._is_close:
-            return
+            raise RuntimeError('The writer is already closed.')
         self._out_pipe.send(None)
         self._is_close = True
 
@@ -77,4 +77,5 @@ class DisplayWriter(BaseWriter[np.ndarray], multiprocessing.Process):
         cv2.destroyWindow(window_name)
 
     def __del__(self):
-        self.close()
+        if self._is_open and not self._is_close:
+            self.close()
