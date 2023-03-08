@@ -17,7 +17,7 @@ def read_image(image: Union[str, Path]) -> np.ndarray:
     Returns:
         Image as a numpy array. (H, W, C) and dtype uint8, Channel order is RGB.
     """
-    return cv2.cvtColor(cv2.imread(str(image)), cv2.COLOR_BGR2RGB)
+    return cv2.imread(str(image))[..., ::-1]
 
 
 class ImageReader(BaseReader[np.ndarray]):

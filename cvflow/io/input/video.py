@@ -134,7 +134,7 @@ class VideoStreamReader(BaseReader):
         if self._video.isOpened():
             ret, frame = self._video.read()
             if ret:
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                frame = frame[:, :, ::-1]
                 self._frame_count += 1
                 if self._num_frames and self._frame_count >= self._num_frames:
                     self.close()

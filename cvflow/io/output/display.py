@@ -69,6 +69,10 @@ class DisplayWriter(BaseWriter[np.ndarray]):
 
                 if item is None:
                     break
+
+                # Convert RGB to BGR
+                if item.ndim == 3 and item.shape[-1] == 3:
+                    item = item[..., ::-1]
                 cv2.imshow(window_name, item)
             except EOFError:
                 break
