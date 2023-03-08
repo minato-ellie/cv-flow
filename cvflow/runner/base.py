@@ -43,6 +43,18 @@ class BaseRunner(
         """
         Run the runner.
         """
+        for item in self.generate():
+            start = time.perf_counter()
+            func(item)
+            end = time.perf_counter()
+
+            if self.wait_time - (end - start) > 0:
+                time.sleep(self.wait_time - (end - start))
+
+    def run_thread(self, func: Callable[[TInput], None]) -> None:
+        """
+        Run the runner.
+        """
         runner = ThreadRunner.create()
         for item in self.generate():
             start = time.perf_counter()
