@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import TypeVar, Generic
 
+from asyncer import asyncify
 
 TInput = TypeVar('TInput')
 
@@ -44,8 +45,14 @@ class BaseWriter(
         pass
 
     @abstractmethod
-    def write(self, item:TInput) -> None:
+    def write(self, item: TInput) -> None:
         """
         Write the next item.
         """
         pass
+
+    async def async_write(self, item: TInput) -> None:
+        """
+        Write the next item asynchronously.
+        """
+        await asyncify(self.write)(item)

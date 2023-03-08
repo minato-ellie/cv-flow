@@ -3,7 +3,13 @@ import nox
 
 @nox.session
 def tests(session):
-    pass
+    session.install('poetry')
+    session.run('poetry', 'export', '--with', 'test', '--without-hashes',
+                '--format=requirements.txt', '--output=requirements-test.txt')
+    session.install('-r', 'requirements-test.txt')
+
+    session.run('pytest', '--cov=cvflow', '--cov-report=term-missing', '--cov-report=html')
+    session.notify('coverage')
 
 
 @nox.session
