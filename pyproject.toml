@@ -3,7 +3,7 @@ based_on_style = "google"
 
 [tool.poetry]
 name = "cvflow"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Minato <82735346+minato-ellie@users.noreply.github.com>"]
 license = "Apache-2.0"
