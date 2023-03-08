@@ -1,18 +1,17 @@
 from cvflow.runner.video import (
     VideoFileRunner,
     VideoStreamRunner,
-    VideoStreamReader,
-    VideoUrlReader,
-    VideoDeviceReader,
+    VideoUrlRunner,
+    VideoDeviceRunner,
 )
 from cvflow.runner.base import BaseRunner
 
 __all__ = [
     'VideoFileRunner',
     'VideoStreamRunner',
-    'VideoStreamReader',
-    'VideoUrlReader',
-    'VideoDeviceReader',
+    'VideoUrlRunner',
+    'VideoDeviceRunner',
+
     'BaseRunner',
 
     'video',

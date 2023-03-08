@@ -1,9 +1,10 @@
 from colorsys import rgb_to_hsv, hsv_to_rgb
+from typing import Tuple, List
 
 import numpy as np
 
 
-def generate_farthest_colors(n: int) -> list[tuple[float, float, float]]:
+def generate_farthest_colors(n: int) -> List[Tuple[float, float, float]]:
     """
     Generate n colors that are as far apart as possible in HSV space.
 
